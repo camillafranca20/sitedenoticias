@@ -1,7 +1,3 @@
-<?php 
-require_once("php/connect.php");
-conecta();
-?>
 
 <html>
 <meta charset="UTF-8">
@@ -51,3 +47,22 @@ conecta();
 
 </body>
 </html>
+
+<?php
+
+require_once("php/connect.php");
+conecta();
+
+//$sql = mysqli_query($link,'SELECT * FROM noticias');
+//$row = mysqli_fetch_assoc(mysqli_result($sql));
+//echo $row['titulo'];
+
+
+$array = array ('a','b','c','d');
+
+echo(implode('<br>',$array));
+
+//Resultado: a,b,c,d
+
+
+?>
