@@ -32,13 +32,14 @@ if(isset($_POST["Login"])){
 	$senha = addslashes($_POST["senha"]);
 	if($email == "" || $senha = ""){
 		echo "<script> alert ('PREENCHA TODOS OS CAMPOS!'); </script>";
-	}else{
+		return false;
+	}
 
 	conecta();
 	
-	$sql = $link->query("SELECT id from admin where email = '$email'");
+	$sql = $link->query("SELECT email from admin where email = '$email'");
 	if(mysqli_num_rows($sql) == true){
-		$sql2 = $link->query("SELECT id from admin where email = '$email' AND senha = '$senha'");
+		$sql2 = $link->query("SELECT email,senha from admin where email = '$email' AND senha = '".md5($senha)."'");
 		if(mysqli_num_rows($sql2)==true){
 			header("Location ../index.php");
 		} else {
@@ -48,6 +49,7 @@ if(isset($_POST["Login"])){
 	} else {
 		echo  "<script> alert ('O USUÁRIO NÃO EXISTE'); </script>";
 		}
+		$link->close();
 	}
-	
-}
+
+	?>
