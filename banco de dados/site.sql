@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: 09-Set-2018 às 21:01
+-- Generation Time: 10-Set-2018 às 21:56
 -- Versão do servidor: 10.1.10-MariaDB
 -- PHP Version: 7.0.3
 
@@ -19,8 +19,6 @@ SET time_zone = "+00:00";
 --
 -- Database: `site`
 --
-CREATE DATABASE IF NOT EXISTS `site` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
-USE `site`;
 
 -- --------------------------------------------------------
 
@@ -28,13 +26,12 @@ USE `site`;
 -- Estrutura da tabela `admin`
 --
 
-CREATE TABLE IF NOT EXISTS `admin` (
+CREATE TABLE `admin` (
   `email` varchar(80) NOT NULL,
   `senha` varchar(8) NOT NULL,
   `perfil` varchar(50) NOT NULL,
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+  `id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Extraindo dados da tabela `admin`
@@ -51,24 +48,46 @@ INSERT INTO `admin` (`email`, `senha`, `perfil`, `id`) VALUES
 -- Estrutura da tabela `noticias`
 --
 
-CREATE TABLE IF NOT EXISTS `noticias` (
+CREATE TABLE `noticias` (
   `categoria` varchar(80) NOT NULL,
   `titulo` text NOT NULL,
   `slug` varchar(80) NOT NULL,
-  `descrição` text NOT NULL,
+  `descricao` text NOT NULL,
   `palavras_chaves` text NOT NULL,
-  `conteudo` text NOT NULL
+  `conteudo` text NOT NULL,
+  `imagem` varchar(255) NOT NULL DEFAULT '/img/null.jpg',
+  `data` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Extraindo dados da tabela `noticias`
 --
 
-INSERT INTO `noticias` (`categoria`, `titulo`, `slug`, `descrição`, `palavras_chaves`, `conteudo`) VALUES
-('Tecnologia', '"Consertar" o Facebook pode levar até 3 anos, diz Mark Zuckerberg', 'consertar-o-facebook-pode-levar-ate-3-anos-diz-mark-zuckerberg', '', 'Facebook, Zuckerberg, Tecnologia', 'Mark Zuckerberg abriu seu coração sobre o difícil ano que está enfrentando no Facebook. Depois dos problemas com o vazamento de dados da Cambridge Analyitica em março e a forte queda no preço das ações da empresa, o CEO postou em seu perfil oficial na rede social sobre como pretende contornar a situação. Para ele, levará ao menos três anos para arrumar a casa.\r\n\r\nEle ainda falou sobre a questão da interferência externa nas eleições intermediárias, que acontecem neste ano nos Estados Unidos. Recentemente, o Facebook foi convocado para explicar ao Senado como pretende colaborar para evitar possíveis problemas e prestar esclarecimentos.\r\n\r\n“Tenho gasto muito tempo nesses problemas e assim que as coisas acalmarem eu devo descrever uma série de notas apontando o que estou pensando sobre eles e os passos para resolvê-los”, escreveu.\r\nEmbora acredite que o projeto para fazer a rede social mais segura tanto para os usuários quanto para evitar interferência externa, ele ainda informa que o Facebook começou a trabalhar em cima disso já no ano passado, de forma que, em 2019, já seja um ambiente melhor com os problemas resolvidos.\r\n\r\nZuckerberg ainda falou sobre liberdade de discurso dentro da plataforma. Para ele, é preciso garantir que as pessoas possam dizer o que pensam, contudo é necessário fazer com que todos tenham um ambiente seguro para isso.\r\n\r\nAtualmente, foi adicionada à plataforma a verificação de publicidade e também mais detalhes sobre quem está investindo em anúncios na rede social. Para Zuckerberg, somente isso “já colabora para mitigar o problema”.\r\n\r\nO CEO enfrenta problemas com privacidade e interferência em questões políticas desde o caso Cambridge Analytica em março, quando vazaram dados de mais de 87 milhões de usuários. A suspeita é de que as informações tenham sido usadas para favorecer a campanha que elegeu Donald Trump presidente dos Estados Unidos em 2016. Ainda, também há suspeitas de que a Cambridge Analytica tenha relação com o Brexit, que culminou na saída do Reino Unido da União Europeia.'),
-('Tecnologia', 'Twitter lança ferramenta de transmissão de áudio ao vivo', 'twitter-lanca-ferramenta-de-transmissao-de-audio-ao-vivo', '', 'Twitter, ferramenta, lançamento', 'O Twitter lançou nesta sexta-feira (7) uma nova ferramenta semelhante ao Periscope, só que focada apenas em áudio. A informação foi confirmada tanto pelo perfil oficial da plataforma quanto por seu presidente executivo, Jack Dorsey.\r\n\r\nPor enquanto, ela só está disponível na versão de iOS do Twitter, bem como no Periscope. Para isso, o usuário precisa clicar em “Live” e escolher a opção de apenas transmitir em áudio.\r\nSegundo Dorsey, tal ferramenta já estava disponível para testes para alguns países e contas, mas que somente nesta sexta-feira (7) foi oficialmente ao ar. Até o momento, não há informações sobre quando a atualização chegará para outras plataformas.\r\nA ferramenta pode ser uma opção interessante para empresas que gravam podcast com transmissão ao vivo para os usuários. Pela plataforma, é possível que usuários possam também comentar como acontece no Periscope.\r\n\r\nPor fim, a ferramenta entrega para o produtor detalhes sobre estatísticas de visualizações únicas e repetidas, além de tempo médio executado pelos ouvintes.'),
-('Brasil', 'Peritos já sabem onde começou o fogo no Museu Nacional; hipótese de incêndio criminoso não é descartada', 'peritos-ja-sabem-onde-comecou-o-fogo-no-museu', 'Local exato onde incêndio começou não foi divulgado pela Polícia Federal para não atrapalhar as investigações. Quinta da Boa Vista recebeu manifestantes neste 7 de setembro.', 'Museu Nacional, Incendio, Rio de Janeiro', 'Os peritos da Polícia Federal já sabem onde começou o fogo no Museu Nacional. Mas, para evitar especulações sobre a causa da tragédia, ainda não divulgaram o local exato. A hipótese de incêndio criminoso não está descartada pelos investigadores, conforme apurou o RJTV.\r\nO Museu Nacional, na Quinta da Boa Vista, em São Cristóvão, foi destruído por um incêndio de grandes proporções no dia 2 de setembro.\r\nNesta sexta-feira (7), muita gente aproveitou o feriado para passear na Quinta da Boa Vista. Foi lá, no palácio que abrigava o Museu Nacional, que teve início o processo de independência do Brasil. Em agosto de 1822, Dom Pedro viajou para São Paulo e nomeou a princesa Leopoldina regente interina do Brasil. Dez dias depois, ela recebeu uma carta de Portugal com péssimas notícias. As medidas anunciadas acabavam com o poder de Dom Pedro e ainda ameaçam dividir o Brasil.\r\n\r\nLeopoldina não pode esperar pela volta do príncipe e, após uma reunião com o conselho de ministros, assinou a declaração de Independência do Brasil dentro do palácio da Quinta da Boa Vista. O famoso Grito do Ipiranga só aconteceu cinco dias depois.');
+INSERT INTO `noticias` (`categoria`, `titulo`, `slug`, `descricao`, `palavras_chaves`, `conteudo`, `imagem`, `data`) VALUES
+('Tecnologia', 'Homossexualidade ainda é criminalizada em mais de 70 países', 'homossexualidade-ainda-e-criminalizada-em-mais-de-70-paises', 'Na semana passada, Justiça indiana revogou decisão que previa punição por ''relações carnais contra a ordem da natureza''. Veja onde persiste a chamada ''homofobia de Estado''.', 'homossexualidade, mundo, criminalização', 'Em uma decisão histórica, a Suprema Corte da Índia descriminalizou na quinta-feira (6) a homossexualidade no país. A discriminação por causa da orientação sexual passou a ser uma violação dos direitos fundamentais no país asiático.\r\n\r\nA decisão unânime revogou uma sentença de 2013 que validava um artigo do Código Penal indiano da era colonial que punia "relações carnais contra a ordem da natureza" e criminalizava com penas de 10 anos de prisão as relações entre pessoas do mesmo sexo.\r\n\r\nNo entanto, em dezenas de países, gays, lésbicas e transexuais ainda são tratados como criminosos, e estão sujeitos até à pena de morte em alguns deles. É a chamada “homofobia de Estado”.\r\nEm relatório do ano passado, a associação internacional ILGA (International Lesbian, Gay, Bisexual, Trans and Intersex Association), que monitora as leis relacionadas ao tema há 12 anos, identifica 72 países em que relações entre pessoas do mesmo sexo são consideradas crime. Com a descriminalização aprovada na Índia, portanto, restam ainda 71 países nessa condição.\r\n\r\nO número representa um terço do total de estados membros da ONU (Organização das Nações Unidas). Em 2006, quando foi feito o primeiro estudo, a lista tinha 92 países.\r\n\r\nAs punições variam de multas e prisão à pena de morte. Há também países que não preveem penalidade ou não a aplicam atualmente, mas mantêm a criminalização em seu código penal.\r\n\r\nExistem três etapas básicas no caminho para o reconhecimento legal dos direitos LGBT: descriminalização (que relações homossexuais deixem de ser crime), proteção (leis contra a discriminação, por exemplo, no acesso a emprego) e reconhecimento (casamento e direito à adoção, entre outros).\r\n\r\nO Brasil foi incluído na lista do “reconhecimento” quando o casamento gay foi reconhecido por via judicial.', '/img/india1.jpg', '2018-09-10 19:15:39'),
+('', 'Defesa de Lula vai ao STF para ampliar prazo de substituição de candidato à Presidência', '', 'Advogados solicitam também suspensão de inelegibilidade e autorização para Lula fazer campanha; prazo fixado pelo TSE para substituição termina esta terça-feira (11).', '', 'A defesa do ex-presidente Luiz Inácio Lula da Silva apresentou nesta segunda-feira (10) um novo pedido ao Supremo Tribunal Federal (STF) para ampliar o prazo de substituição do candidato do PT na corrida à Presidência da República.\r\n\r\nO objetivo mais imediato é adiar o prazo de substituição desta terça (11) para o próximo dia 17 de setembro, segunda-feira da próxima semana. O pedido será analisado pelo ministro Celso de Mello, responsável pelo caso no STF.\r\n\r\nOs advogados haviam feito o mesmo pedido ao Tribunal Superior Eleitoral (TSE), mas a presidente da Corte, Rosa Weber, negou a prorrogação do prazo. Na mesma decisão, a ministra enviou o recurso extraordinário da defesa, que discute a inelegibilidade do petista, para apreciação do STF.', '/img/null.jpg', '2018-09-10 19:53:00'),
+('', 'Quase 100 detentos fogem de presídio de segurança máxima em João Pessoa', '', 'Um total de 92 presos fugiram do PB1 e 41 foram recapturados, diz secretaria. Criminosos derrubaram portão principal do presídio e trocaram tiros com policiais militares e agentes penitenciários. Um PM foi morto.', '', 'Pelo menos 92 presos fugiram da Penitenciária de Segurança Máxima Romeu Gonçalves Abrantes, o PB1, na madrugada desta segunda-feira (10) em João Pessoa, segundo nota divulgada pela Secretaria de Estado de Defesa Social (Seds). Até as 15h40, 41 detentos foram recapturados, segundo a Secretaria de Administração Penitenciária (Seap). Segundo a Polícia Militar, as principais divisas com Pernambuco, Rio Grande do Norte e Ceará foram fechadas.\r\n\r\nInicialmente a Seds trabalhava com a possibilidade de fuga de pelo menos 105 detentos, mas após uma recontagem, o órgão informou, às 15h40, que foram 92 fugitivos.\r\n\r\nUm tenente da Polícia Militar foi baleado na rodovia estadual PB-008 e teve morte cerebral confirmada, segundo a Seds. Erivaldo Moneta, de 36 anos, estava em um posto policial que teria sido alvo de vários tiros após a fuga de quase 100 detentos.\r\n\r\nO presídio tem capacidade para 660 presos e atualmente tinha cerca de 680 detentos, conforme o secretário Sérgio Fonseca. De acordo com o sistema Geopresídios, do Conselho Nacional de Justiça (CNJ), a unidade prisional tinha 681 presos em 644 vagas. Segundo a Seap, "a quantidade de agentes no local era suficiente para fornecer a guarda do PB1, foi uma ação pontual".\r\n\r\nO comandante-geral da Polícia Militar da Paraíba, Euller Chaves, afirmou que "todas as forças de segurança estão buscando caçar esses elementos. A PM está de prontidão nas ruas, vamos dar proteção adequada à população. Vamos buscar efetivamente resgatar naturalmente a sensação de insegurança (após a fuga em massa)".\r\n\r\nO secretário de segurança Cláudio Lima disse que "as escolas estaduais estão funcionando. Mas nós não temos poder de mando sobre as municipais. Podemos dizer que a polícia vai estar nas ruas. Não teve nenhum grande problema".', '/img/null.jpg', '2018-09-10 19:53:00'),
+('', 'Quase 100 detentos fogem de presídio de segurança máxima em João Pessoa', '', 'Um total de 92 presos fugiram do PB1 e 41 foram recapturados, diz secretaria. Criminosos derrubaram portão principal do presídio e trocaram tiros com policiais militares e agentes penitenciários. Um PM foi morto.', '', 'Pelo menos 92 presos fugiram da Penitenciária de Segurança Máxima Romeu Gonçalves Abrantes, o PB1, na madrugada desta segunda-feira (10) em João Pessoa, segundo nota divulgada pela Secretaria de Estado de Defesa Social (Seds). Até as 15h40, 41 detentos foram recapturados, segundo a Secretaria de Administração Penitenciária (Seap). Segundo a Polícia Militar, as principais divisas com Pernambuco, Rio Grande do Norte e Ceará foram fechadas.\r\n\r\nInicialmente a Seds trabalhava com a possibilidade de fuga de pelo menos 105 detentos, mas após uma recontagem, o órgão informou, às 15h40, que foram 92 fugitivos.\r\n\r\nUm tenente da Polícia Militar foi baleado na rodovia estadual PB-008 e teve morte cerebral confirmada, segundo a Seds. Erivaldo Moneta, de 36 anos, estava em um posto policial que teria sido alvo de vários tiros após a fuga de quase 100 detentos.\r\n\r\nO presídio tem capacidade para 660 presos e atualmente tinha cerca de 680 detentos, conforme o secretário Sérgio Fonseca. De acordo com o sistema Geopresídios, do Conselho Nacional de Justiça (CNJ), a unidade prisional tinha 681 presos em 644 vagas. Segundo a Seap, "a quantidade de agentes no local era suficiente para fornecer a guarda do PB1, foi uma ação pontual".\r\n\r\nO comandante-geral da Polícia Militar da Paraíba, Euller Chaves, afirmou que "todas as forças de segurança estão buscando caçar esses elementos. A PM está de prontidão nas ruas, vamos dar proteção adequada à população. Vamos buscar efetivamente resgatar naturalmente a sensação de insegurança (após a fuga em massa)".\r\n\r\nO secretário de segurança Cláudio Lima disse que "as escolas estaduais estão funcionando. Mas nós não temos poder de mando sobre as municipais. Podemos dizer que a polícia vai estar nas ruas. Não teve nenhum grande problema".', '/img/null.jpg', '2018-09-10 19:54:12');
 
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `admin`
+--
+ALTER TABLE `admin`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `admin`
+--
+ALTER TABLE `admin`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

@@ -33,48 +33,42 @@
         <li><a href="#">Esportes</a></li>
         <li><a href="#">Economia</a></li>
         <li><a href="#">Tecnologia</a></li>                
-</ul>
+        </ul>
 </nav>
     </div>
       </fieldset>
-      <div class="conteudo">
+    </head>
 
-      </div>
-      <div class="rodape">
-        <span> &copy; <?=date('Y')?> - Todos os direitos reservados.</span>
-      </div>
-  </div>
-     
-  </head>
 <body>
-
+    <div class="conteudo">
 
 <?php
 
+    echo '<table>
+    <thead>
+    </thead>';
 
 require_once("php/connect.php");
 conecta();
 
 $sql = mysqli_query($link,'SELECT * FROM noticias');
-$row = mysqli_fetch_assoc($sql);
-$cont = mysqli_num_rows($sql);
-$array = mysqli_fetch_array($sql);
-//echo $row['titulo'];
 
- 
-if($row <= $cont ){
-   $titulo = $row["titulo"];
-  //$slug = $_POST["slug"];
-  $descricao = $row["descricao"];
-  $palavras_chaves = $row["palavras_chaves"];
-  $conteudo = $row["conteudo"];
-  $categoria = $row["categoria"];
+            
+while($row = mysqli_fetch_array($sql)){
+    $slug = $row["slug"];
+    $palavras_chaves = $row["palavras_chaves"];
+    $categoria = $row["categoria"];
+    
+echo '<td>'.$row["titulo"].'</td><td>'.$row["descricao"].'</td><td><tr>'.$row["conteudo"].'</tr>'.$row["imagem"].$row["data"];
 
-   echo implode("<br>", $array);
-} else{
+  
  
 }
-?>
+            
+              include 'php/footer.php';
+?>          
+            
+   
 
 </body>
 </html>

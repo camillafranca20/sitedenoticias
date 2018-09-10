@@ -28,9 +28,44 @@ conecta();
 		<textarea name="conteudo" rows="10" cols="50" ></textarea><br><br>
 		<label>Palavras-chave</label><br><br>
 		<input type="text" name="palavras_chave" size="50"></textarea><br><br>
-		<input type="text" name="imgname" size="50" readonly="true"><input type="image" name="imagem" src="../img/foto.png" title="procurar..."><br><br><br>	
+		<input type="text" name="imgname" size="50" readonly="true"><input type="image" name="imagem" src="../img/foto.png" title="procurar..." action="abre()"><br><br><br>	
 		<input type="submit" name="inserir" value="Inserir">
 		</fieldset>
 	</form>
+        
+        <?php
+        conecta();
+        
+        
+        $titulo = $_POST['titulo'];
+        $descricao = $_POST['descricao'];
+        $conteudo = $_POST['conteudo'];
+        $palavras_chave = $_POST['palavras_chave'];
+        $imgname = $_POST['imgname'];
+        
+               if(isset($_POST["imagem"])){
+            
+            function abre(){
+                $imgname =  dir("../img"); 
+                read($imgname);
+                
+            } 
+        }
+        
+        if($titulo!= "" || $descricao != "" || $conteudo != "" || $palavras_chave != ""){
+            $sql = mysqli_query($link, "INSERT INTO noticias(titulo, descricao, conteudo, palavras_chaves) VALUES ('$titulo', '$descricao', '$conteudo', '$palavras_chave', 'dirname($imgname)')");
+            if($sql){
+                echo "<script> alert ('Notícia cadastrada com sucesso!'); </script>";
+            }else{
+                echo "<script> alert ('Erro no cadastro da notícia!'); </script>";
+                return false;
+            }
+        } else{
+            echo "<script> alert ('PREENCHA TODOS OS CAMPOS!'); </script>";
+            return false;
+        }
+        
+        
+        ?>
 </body>
 </html>
